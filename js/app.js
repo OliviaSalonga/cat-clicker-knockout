@@ -33,29 +33,28 @@ var initialCats =
 ];
 	
 var Cat = function(data) {
-	this.name = ko.observable(data.name);
-	this.imgScr = ko.observable(data.imgScr);
-	this.nicknames = ko.observableArray(data.nicknames);
+	this.name = data.name;
+	this.imgScr = data.imgScr;
+	this.nicknames = data.nicknames;
 	this.clickCount = ko.observable(data.clickCount);
 };
 
 var ViewModel = function() {
 	var self = this;
 
-	this.catList = ko.observableArray([]);
+	this.catList = [];
 	initialCats.forEach(function(catItem) {
 		self.catList.push( new Cat(catItem) );
 	});
 	
-	this.currentCat = ko.observable(this.catList()[0]);		
-	console.log(this.currentCat().clickCount());
+	this.currentCat = ko.observable(this.catList[0]);		
 	
-	this.incrementCounter = function() {;
+	this.incrementCounter = function() {
 		self.currentCat().clickCount(self.currentCat().clickCount() + 1);
 	};
 	
-	this.setCurrentCat = function(index) {;
-		this.currentCat = this.currentCat = ko.observable(this.catList()[index]);
+	this.setCurrentCat = function(index) {
+		self.currentCat(self.catList[index]);
 	};
 };	
 	
